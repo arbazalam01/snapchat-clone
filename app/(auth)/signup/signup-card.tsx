@@ -16,7 +16,7 @@ export default function SignupCard() {
       </form>
 
       <div className="mt-4 text-center text-[13px]">
-        <span>Already have an account? </span>
+        <span>Already have an account? Hello</span>
         <Link
           className="text-blue-500 hover:underline text-[13px] mr-1"
           href="/login"
