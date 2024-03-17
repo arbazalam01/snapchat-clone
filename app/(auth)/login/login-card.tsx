@@ -2,17 +2,13 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { authAction } from "@/lib/actions";
+import { authActionGithub } from "@/lib/actions";
 import { useFormState, useFormStatus } from "react-dom";
 
 export default function LoginCard() {
-	// inline server action: in client components cannot be used as inline. You have to put it in a file and import it.
-	// async function authAction() {
-	// 	"use server";
-	// 	await signIn("github");
-	// }
 
-	const [errorMessage, dispatch] = useFormState(authAction, "");
+
+	const [errorMessage, dispatch] = useFormState(authActionGithub, "");
 
 	return (
 		<>

@@ -13,9 +13,20 @@ cloudinary.config({
 	api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function authAction() {
+export async function authActionGithub() {
 	try {
 		await signIn("github"); // redirect()
+	} catch (error: any) {
+		if (error.message === "NEXT_REDIRECT") {
+			throw error;
+		}
+		return error.message;
+	}
+}
+
+export async function authActionGoogle() {
+	try {
+		await signIn("google"); // redirect()
 	} catch (error: any) {
 		if (error.message === "NEXT_REDIRECT") {
 			throw error;

@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import { connectToMongoDB } from "./lib/db";
 import User from "./models/userModel";
 
@@ -9,6 +10,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			clientId: process.env.AUTH_GITHUB_ID,
 			clientSecret: process.env.AUTH_GITHUB_SECRET,
 		}),
+		GoogleProvider({
+			clientId: process.env.AUTH_GOOGLE_ID,
+			clientSecret: process.env.AUTH_GOOGLE_SECRET,
+		})
 	],
 	secret: process.env.AUTH_SECRET,
 	callbacks: {
@@ -32,7 +37,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			}
 		},
 		async signIn({ account, profile }) {
-			if (account?.provider === "github") {
+			if (account?.provider === "github" || account?.provider === "google") {
 				await connectToMongoDB();
 
 				try {
