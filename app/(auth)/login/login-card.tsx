@@ -2,64 +2,58 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { authActionGithub } from "@/lib/actions";
+import { authActionGithub, authActionGoogle } from "@/lib/actions";
 import { useFormState, useFormStatus } from "react-dom";
 
 export default function LoginCard() {
+  const [errorMessage, dispatch] = useFormState(authActionGoogle, "");
 
-
-	const [errorMessage, dispatch] = useFormState(authActionGithub, "");
-
-	return (
-		<>
-			<form action={dispatch} className='space-y-4'>
-				<LoginButton />
-			</form>
-			<div className='mt-4 text-center text-[13px]'>
-				<span>New To SnapNext? </span>
-				<Link className='text-blue-500 hover:underline text-[13px] mr-1' href='/signup'>
-					Sign Up
-				</Link>
-				{errorMessage ? <p className='text-sm text-red-500'>{errorMessage}</p> : null}
-			</div>
-		</>
-	);
+  return (
+    <>
+      <form action={dispatch} className="space-y-4">
+        {/* <LoginButton /> */}
+        <SignUpButtonGoogle />
+      </form>
+      <div className="mt-4 text-center text-[13px]">
+        <span>New To SnapNext? </span>
+        <Link
+          className="text-blue-500 hover:underline text-[13px] mr-1"
+          href="/signup"
+        >
+          Sign Up
+        </Link>
+        {errorMessage ? (
+          <p className="text-sm text-red-500">{errorMessage}</p>
+        ) : null}
+      </div>
+    </>
+  );
 }
 
 function LoginButton() {
-	const { pending } = useFormStatus();
-	return (
-		<Button className='w-full flex gap-2' disabled={pending} aria-disabled={pending}>
-			<Image src={"/github.svg"} width={20} height={20} alt='Github logo' /> Log in with Github
-		</Button>
-	);
+  const { pending } = useFormStatus();
+  return (
+    <Button
+      className="w-full flex gap-2"
+      disabled={pending}
+      aria-disabled={pending}
+    >
+      <Image src={"/github.svg"} width={20} height={20} alt="Github logo" /> Log
+      in with Github
+    </Button>
+  );
 }
 
-// STARTER CODE FOR THIS FILE. TimeStamp to paste this code => 00:39:50
-// import Link from "next/link";
-// import { Button } from "@/components/ui/button";
-// import Image from "next/image";
-
-// export default function LoginCard() {
-// 	return (
-// 		<>
-// 			<form className='space-y-4'>
-// 				<LoginButton />
-// 			</form>
-// 			<div className='mt-4 text-center text-[13px]'>
-// 				<span>New To SnapNext? </span>
-// 				<Link className='text-blue-500 hover:underline text-[13px] mr-1' href='/signup'>
-// 					Sign Up
-// 				</Link>
-// 			</div>
-// 		</>
-// 	);
-// }
-
-// function LoginButton() {
-// 	return (
-// 		<Button className='w-full flex gap-2'>
-// 			<Image src={"/github.svg"} width={20} height={20} alt='Github logo' /> Log in with Github
-// 		</Button>
-// 	);
-// }
+function SignUpButtonGoogle() {
+  const { pending } = useFormStatus();
+  return (
+    <Button
+      className="w-full flex gap-2"
+      disabled={pending}
+      aria-disabled={pending}
+    >
+      <Image src={"/google.svg"} width={20} height={20} alt="Google logo" />{" "}
+      Sign in with Google
+    </Button>
+  );
+}
