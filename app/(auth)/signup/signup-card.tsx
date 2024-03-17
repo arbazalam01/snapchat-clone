@@ -11,12 +11,12 @@ export default function SignupCard() {
   return (
     <>
       <form action={dispatch} className="space-y-4">
-        <SignUpButtonGithub />
+        {/* <SignUpButtonGithub /> */}
         <SignUpButtonGoogle />
       </form>
 
       <div className="mt-4 text-center text-[13px]">
-        <span>Already have an account? Hello</span>
+        <span>Already have an account? </span>
         <Link
           className="text-blue-500 hover:underline text-[13px] mr-1"
           href="/login"
